@@ -1,15 +1,12 @@
 <template>
   <div id="app">
-    <nav class="navbar is-black" role="navigation" aria-label="main navigation">
+    <nav class="navbar navigationbar" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
       <a class="navbar-item" href="/#/">
         ISOHEL
       </a>
       </div>
       <div class="navbar-end">
-        <p class = "control" v-if="isLoggedIn">
-          <a class="button is-white myButton" @click="goToAcc()">Account</a>
-        </p>
         <p class = "control" v-if="isLoggedIn">
           <a class="button is-white myButton" @click="goToPort()">Portfolio</a>
         </p>
@@ -18,8 +15,8 @@
         </p><p class = "control" v-if="isLoggedIn">
           <a class="button is-white myButton" @click="goToAnalysis()">Analysis</a>
         </p>
-        <p class="control" v-if="isLoggedIn">
-          <a class="tag is-info is-medium namelabel">{{user.name}}</a>
+        <p class = "control" v-if="isLoggedIn">
+          <a class="button namelabel myButton" @click="goToAcc()">{{ user.name }}</a>
         </p>
         <p class="control" v-if="!isLoggedIn">
           <a class="button is-white myButton" @click="login()">Login with Google</a>
@@ -68,12 +65,35 @@ export default {
 
 .namelabel{
 
+  color: white;
+  background: #1ec2cb;
   margin-left: 1em;
   margin-right: 1em;
   margin-top: 1em;
-  margin-bottom: 1em;
-  font-size: 4rem;
-  align-content: center;
+  border: #3e82ad;
+
+}
+
+.butlabel{
+
+  color: white;
+  background: #1ec2cb;
+  border: #3e82ad;
+
+}
+
+.navigationbar{
+  background: rgb(221,170,231);
+  background:
+   linear-gradient(90deg, rgba(221,170,231,1) 0%, rgba(170,196,233,1) 31%, rgba(56,255,236,1) 100%);
+}
+
+.portfolio{
+  background: #cbfffa;
+}
+
+.watchlist{
+  background: #fae1ff;
 }
 
 </style>

@@ -5,10 +5,11 @@ import auth from '../store/auth';
 
 import Home from '../views/Home.vue';
 import Dash from '../views/Dash.vue';
-import Analysis from '../views/Analysis.vue';
+import BS from '../views/BlackScholes.vue';
 import Port from '../views/Port.vue';
 import Account from '../views/Account.vue';
 import Yeet from '../views/Yeet.vue';
+import Anal from '../views/Analysis.vue';
 
 Vue.use(VueRouter);
 
@@ -30,9 +31,17 @@ const routes = [
     },
   },
   {
-    path: '/analysis',
+    path: '/BlackScholes',
+    name: 'BlackScholes',
+    component: BS,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/Analysis',
     name: 'Analysis',
-    component: Analysis,
+    component: Anal,
     meta: {
       requiresAuth: true,
     },

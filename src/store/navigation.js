@@ -17,6 +17,10 @@ const actions = {
     console.log('yeeto');
     router.push('/account');
   },
+  goToBS() {
+    console.log('yeeto');
+    router.push('/BlackScholes');
+  },
 };
 
 export default {

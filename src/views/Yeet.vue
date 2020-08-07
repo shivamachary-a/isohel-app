@@ -29,9 +29,9 @@ export default {
     addMessage() {
       const path = 'http://localhost:5000/';
       axios.get(path)
-      .then((res) => {
-        this.data = res.data.cocks;
-      });
+        .then((res) => {
+          this.data = res.data.cocks;
+        });
     },
   },
   created() {

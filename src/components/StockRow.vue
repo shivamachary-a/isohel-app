@@ -1,19 +1,19 @@
 <template>
-  <tr key="componentKey">
-    <td class="button is-black yeet" v-on:click = "calliex()">Refresh</td>
-    <td>{{ticker}}</td>
-    <td class="pricebox">{{this.stockdetails.price}}</td>
-    <td class ="button is-black yeet" :click="deleteC()">Remove</td>
-  </tr>
+  <div>
+      <tr v-if="componentKey">
+        <td class='pricebox'>£{{ getPrice() }}</td>
+      </tr>
+  </div>
 </template>
 <script>
 import firebase from '@/firebase';
 import store from '@/store';
 import db from '@/db';
+import port from '../store/port';
 
 export default {
   name: 'StockRow',
-  props: ['ticker'],
+  props: ['ticker', 'id'],
   data() {
     return {
       stockdetails: {
@@ -22,42 +22,54 @@ export default {
         date: null,
       },
       clicked: false,
-      componentKey: 0,
+      componentKey: true,
     };
   },
   methods: {
-    calliex: async function () {
+    async calliex() {
       const base = 'https://sandbox.iexapis.com/stable/stock/';
-      const stock = this.ticker;
+      const stock = this.ticker['Ticker'];
       const end = '/quote/latestPrice?token=Tsk_12a652ebe24b4421a3401e1a649f418c';
-
       const url = base.concat(stock).concat(end);
       await fetch(url)
         .then((response) => response.json())
         // eslint-disable-next-line
-        .then(data => {
+        .then((data) => {
           this.stockdetails.price = data;
           console.log(this.stockdetails);
         });
     },
 
-    deleteC: function () {
-      this.componentKey += 1;
+    deleteC() {
+      port.actions.deleteFromPortfolio(this.id);
     },
+    getPrice() {
+      return (Math.round(this.stockdetails.price * 100) / 100);
+    },
+    refresh() {
+      this.calliex();
+      this.getPrice();
+    },
+  },
+  created: function () {
+    this.refresh();
+    if (this.stockdetails.price === 0) {
+      this.refresh();
+    }
+    window.setInterval(() => {
+      this.refresh();
+      }, 5000);
   },
 };
 </script>
 <style scoped>
-.yeet{
-
-  margin-left:1em;
-  margin-right:1em;
-  margin-top:2mm;
-  margin-top:2mm;
-  margin-bottom:1mm;
+.yeet {
+  margin-left: 1em;
+  margin-top: 2mm;
+  margin-bottom: 1mm;
 }
 
-.pricebox{
-  margin-right:3em;
+.pricebox {
+  margin-right: 3em;
 }
 </style>

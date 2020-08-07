@@ -1,8 +1,8 @@
 <template>
   <div class="hello">
     <VueTradingView :options="{
-      theme: 'dark',
-      width: '640',
+      theme: 'light',
+      width: '550',
       height: '400',
     }" />
   </div>
