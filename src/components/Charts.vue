@@ -2,7 +2,7 @@
   <div class="hello">
     <VueTradingView :options="{
       theme: 'light',
-      width: '550',
+      width: '600',
       height: '400',
     }" />
   </div>

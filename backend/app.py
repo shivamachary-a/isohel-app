@@ -6,22 +6,47 @@ from sympy import init_printing
 init_printing()
 from flask import Flask, render_template, jsonify, request
 from flask_cors import CORS
+from datetime import date, timedelta
+import requests
+import json
 
 
 
 
 app = Flask(__name__) #initiates flask app
 
-app.secret_key = b'_5#y2L"F4Q8z\n\xec]/
-
 stocks = {}
 options = []
+volol = []
 
 CORS(app, resources={r'/*': {'origins': '*'}})
 
-def euro_vanilla_call(S, K, T, r, sigma):
+def getAdjClose(ticker):
+  today = date.today()
+  base = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol="
+  ti = ticker
+  end = "&apikey=A1VFP8M71VTXQIVO"
+  url = base + ti + end
+  response = requests.get(url)
+  parsed = json.loads(response.text)
 
-    # This function uses the Black and Scholes formula to determine the value of a call option.
+  values = []
+
+  i = 0
+  while i < 200:
+    try:
+      d = date.today() - timedelta(days=i)
+      values.append(float(parsed['Time Series (Daily)'][str(d)]['4. close']))
+      i = i + 1
+    except KeyError:
+      i = i + 1
+      
+  return values
+
+def stockVolatility (values):
+  return np.std(values) * np.sqrt(len(values))
+
+def euro_vanilla_call(S, K, T, r, sigma):
     
     #S: spot price
     #K: strike price
@@ -38,7 +63,6 @@ def euro_vanilla_call(S, K, T, r, sigma):
 
 def euro_vanilla_put(S, K, T, r, sigma):
 
-  # This function uses the Black and Scholes formula to determine the value of a put option.
 
   #S: spot price
   #K: strike price
@@ -84,12 +108,27 @@ def yeet():
     response_object['stocks'] = options
   return jsonify(response_object)
 
-@app.route('/volatility', methods=['GET', 'POST'])
+@app.route('/volatility', methods=['GET','POST'])
 def volatility():
+
   response_object = {'status': 'success'}
   if request.method == 'POST':
     post_data = request.get_json()
+    print(post_data)
     #response should just have a ticker name
+    stock = post_data.get('ticker')
+    close =  getAdjClose(stock)
+    result = stockVolatility(close)
+    print(result)
+    volol.insert(0, {
+      'Result': result
+    })
+    print(volol)
+  else:
+    response_object['yonk'] = volol
+  return jsonify(response_object)
+  
+
 
 
     

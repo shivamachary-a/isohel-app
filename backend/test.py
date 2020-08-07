@@ -17,7 +17,7 @@ def getAdjClose(ticker):
   values = []
 
   i = 0
-  while i < 40:
+  while i < 200:
     try:
       d = date.today() - timedelta(days=i)
       values.append(float(parsed['Time Series (Daily)'][str(d)]['4. close']))

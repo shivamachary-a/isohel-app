@@ -1,13 +1,16 @@
 <template>
-  <div class="container is-fluid">
-    <div class="columns">
-        <div class="tile is-ancestor tilestruct column">
-        <div class="tile is-vertical tilestruct column">
+<div>
+  <div class="container cont is-fluid">
+    <div class="">
+        <div class="tile is-ancestor ">
+        <div class="tile is-vertical ">
           <div class="tile" >
-            <div class="tile is-parent is-4 is-vertical">
+            <div class="tile is-parent is-vertical">
               <article class="tile is-child notification is-grey">
-                <p class="title">Welcome,</p>
-                <p class="subtitle">{{user.name}}</p>
+                <p class="title is-1">Hi,</p>
+                <p class="subtitle is-4">{{user.name}}</p>
+                <p class="subtitle is-6">Welcome to isohel.</p>
+                <p class="subtitle is-6">Check out the latest guides and tools added!</p>
               </article>
               <article class="tile is-child notification is-light">
                 <p class="title"> Charts </p>
@@ -15,7 +18,7 @@
                 <Charts></Charts>
               </article>
             </div>
-            <div class="tile is-parent is-4 column">
+            <div class="tile is-parent ">
               <article class="tile is-child notification watchlist">
                 <div class="content">
                   <p class="title">Your watchlist</p>
@@ -26,7 +29,7 @@
                 </div>
               </article>
             </div>
-            <div class="tile is-parent is-vertical is-4 column">
+            <div class="tile is-parent is-vertical ">
               <article class="tile is-child notification portfolio">
                 <p class="title">Portfolio</p>
                 <p class="subtitle">Your stocks:</p>
@@ -39,7 +42,8 @@
         </div>
       </div>
     </div>
-  </div>
+    </div>
+</div>
 </template>
 
 <script>
@@ -70,5 +74,8 @@ export default {
   .tilestruct {
     display: grid;
     align-self: center;
+  }
+  .cont{
+    margin-bottom: 1em;
   }
 </style>

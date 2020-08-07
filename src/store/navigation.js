@@ -21,6 +21,9 @@ const actions = {
     console.log('yeeto');
     router.push('/BlackScholes');
   },
+  goToVol() {
+    router.push('/volatility');
+  },
 };
 
 export default {

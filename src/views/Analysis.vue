@@ -12,7 +12,7 @@
                 </a>
             </a>
             <a class="panel-block">
-                Volatility
+                <a @click="goToVol()">Volatility</a>
                 <a id="VOL" class="infoB button is-small">Quick Info</a>
             </a>
         </article>
@@ -41,7 +41,7 @@ export default {
     methods: {
         ...mapActions('auth', ['login', 'logout', 'leave']),
 
-        ...mapActions('navigation', ['goToPort', 'goToAnalysis', 'goToDash', 'goToAcc', 'goToBS']),
+        ...mapActions('navigation', ['goToPort', 'goToAnalysis', 'goToDash', 'goToAcc', 'goToBS', 'goToVol']),
 
         infoClick(event, id) {
             const currentModal = document.getElementById(id);

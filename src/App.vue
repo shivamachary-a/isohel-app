@@ -12,12 +12,15 @@
         </p>
         <p class = "control" v-if="isLoggedIn">
           <a class="button is-white myButton" @click="goToDash()">Dashboard</a>
-        </p><p class = "control" v-if="isLoggedIn">
+        </p>
+        <p class = "control" v-if="isLoggedIn">
           <a class="button is-white myButton" @click="goToAnalysis()">Analysis</a>
         </p>
         <p class = "control" v-if="isLoggedIn">
           <a class="button namelabel myButton" @click="goToAcc()">{{ user.name }}</a>
-        </p>
+          <figure class="image is-32x32 myButton">
+            <img :src="user.image">
+          </figure>
         <p class="control" v-if="!isLoggedIn">
           <a class="button is-white myButton" @click="login()">Login with Google</a>
         </p>
@@ -94,6 +97,10 @@ export default {
 
 .watchlist{
   background: #fae1ff;
+}
+.loggedIn{
+  display: grid;
+
 }
 
 </style>

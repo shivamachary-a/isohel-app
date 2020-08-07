@@ -1,7 +1,8 @@
 <template>
   <div>
       <tr v-if="componentKey">
-        <td class='pricebox'>£{{ getPrice() }}</td>
+        <td class="pricebox">{{ getPrice() }}</td>
+        <a class ="button is-small yeet" @click="refresh()">Refresh</a>
       </tr>
   </div>
 </template>
@@ -44,7 +45,13 @@ export default {
       port.actions.deleteFromPortfolio(this.id);
     },
     getPrice() {
-      return (Math.round(this.stockdetails.price * 100) / 100);
+      const curr = '£';
+      const price = (Math.round(this.stockdetails.price * 100) / 100);
+      if (price === 0) {
+        return 'error';
+      } else {
+        return curr + price;
+      }
     },
     refresh() {
       this.calliex();

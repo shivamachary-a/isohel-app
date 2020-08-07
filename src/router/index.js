@@ -10,6 +10,7 @@ import Port from '../views/Port.vue';
 import Account from '../views/Account.vue';
 import Yeet from '../views/Yeet.vue';
 import Anal from '../views/Analysis.vue';
+import Vol from '../views/Volatility.vue';
 
 Vue.use(VueRouter);
 
@@ -26,6 +27,14 @@ const routes = [
     path: '/dash',
     name: 'Dash',
     component: Dash,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/volatility',
+    name: 'Vol',
+    component: Vol,
     meta: {
       requiresAuth: true,
     },
