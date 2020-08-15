@@ -1,19 +1,9 @@
 <template>
   <div>
-    <table class="table is-fullwidth is-hoverable">
-      <thead>
-        <tr>
-          <th>Stock</th>
-          <th>Price</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="stock in portfolio" :key="stock['Ticker']" >
-          <td class="vert">{{ stock['Ticker'] }}</td>
-          <td class="vert"><StockRow class="touch" :ticker= stock :id= stock.id></StockRow></td>
-        </tr>
-      </tbody>
-    </table>
+    <h1 class="columns" v-for="stock in portfolio" :key="stock['Ticker']">
+      <p class="vert column is-family-code">{{ stock['Ticker'] }}</p>
+      <StockRow class="touch column is-family-monospace" :ticker= stock :id= stock.id></StockRow>
+    </h1>
   </div>
 </template>
 <script>

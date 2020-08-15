@@ -11,6 +11,9 @@ import Account from '../views/Account.vue';
 import Yeet from '../views/Yeet.vue';
 import Anal from '../views/Analysis.vue';
 import Vol from '../views/Volatility.vue';
+import Watchlist from '../views/Watchlist.vue';
+import News from '../views/News.vue';
+import Prediction from '../views/PredictionsBeta.vue';
 
 Vue.use(VueRouter);
 
@@ -69,9 +72,24 @@ const routes = [
     component: Account,
   },
   {
+    path: '/watchlist',
+    name: 'Watchlist',
+    component: Watchlist,
+  },
+  {
     path: '/ping',
     name: Yeet,
     component: Yeet,
+  },
+  {
+    path: '/news',
+    name: 'News',
+    component: News,
+  },
+  {
+    path: '/pred',
+    name: 'Prediction',
+    component: Prediction,
   },
 ];
 

@@ -1,7 +1,10 @@
 <template>
-  <div class="home">
-    <p class="control" style="text-align:left;" v-if="!isLoggedIn">
-        <label>welcome to isohel</label>
+  <div class="vertical">
+    <h3 class="center title" v-if="!isLoggedIn">
+        <strong>welcome to isohel</strong>
+    </h3>
+    <p class="center">
+      <button class="button is-rounded log is-outlined is-medium" @click="login()"> login</button>
     </p>
   </div>
 </template>
@@ -15,3 +18,14 @@ export default {
   methods: mapActions('auth', ['login']),
 };
 </script>
+<style scoped>
+  .center {
+    text-align: center;
+  }
+  .log{
+    margin: 2em;
+  }
+  .vertical{
+    vertical-align: middle;
+  }
+</style>

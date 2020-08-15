@@ -1,8 +1,9 @@
 <template>
   <div>
+    <h1 class="title">YOUR PORTFOLIO</h1>
     <div class="field">
       <div class="control">
-        <input v-model="stock" class="input is-primary" type="text" v-on:keyup.enter="add()" placeholder="Add stock">
+        <input v-model="stock" class="input" type="text" v-on:keyup.enter="add()" placeholder="Add stock">
       </div>
     </div>
     <div v-if="error" class="notification is-danger">
@@ -13,9 +14,9 @@
     <table class="table is-fullwidth is-hoverable">
       <thead>
         <tr>
-          <th>Stock</th>
-          <th>Price</th>
-          <th>Remove</th>
+          <th>STOCK</th>
+          <th>PRICE</th>
+          <th>REMOVE</th>
         </tr>
       </thead>
       <tbody>
@@ -76,7 +77,8 @@ export default {
 <style scoped>
 
   .addbutton {
-    background: aqua;
+    color: black;
+    background: whitesmoke;
     margin-top: 1em;
     margin-bottom:1em;
     display: grid;

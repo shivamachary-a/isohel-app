@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
     <VueTradingView :options="{
-      theme: 'light',
+      theme: 'dark',
       width: '600',
       height: '400',
     }" />

@@ -71,9 +71,8 @@ export default {
 </script>
 <style scoped>
 .yeet {
+  display: grid;
   margin-left: 1em;
-  margin-top: 2mm;
-  margin-bottom: 1mm;
 }
 
 .pricebox {

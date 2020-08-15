@@ -1,9 +1,10 @@
 
 <template>
     <div>
+        <h1 class="title has-text-weight-light">ANALYSIS</h1>
         <article class="panel is-primary">
-            <p class="panel-heading">
-                Analysis
+            <p class="panel-heading has-text-weight-light">
+                METHODS
             </p>
             <a class="panel-block">
                 <a @click="goToBS()"> Black + Scholes</a>

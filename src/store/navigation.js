@@ -24,6 +24,12 @@ const actions = {
   goToVol() {
     router.push('/volatility');
   },
+  goToWatch() {
+    router.push('/watchlist');
+  },
+  goToNews() {
+    router.push('news');
+  },
 };
 
 export default {

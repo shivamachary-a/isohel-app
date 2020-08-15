@@ -2,31 +2,36 @@
   <div id="app">
     <nav class="navbar navigationbar" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
-      <a class="navbar-item" href="/#/">
+      <a class="navbar-item isohel" @click="goToDash()">
         ISOHEL
       </a>
       </div>
+        <div class="navbar-item has-dropdown is-hoverable" v-if="isLoggedIn">
+          <a class="navbar-link isohel is-arrowless">
+            MENU
+          </a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" @click="goToNews()">
+              News
+            </a>
+            <a class="navbar-item" @click="goToWatch()">
+              Watchlist
+            </a>
+            <a class="navbar-item" @click="goToPort()">
+              Portfolio
+            </a>
+            <a class="navbar-item" @click="goToAnalysis()">
+              Analysis
+            </a>
+          </div>
+        </div>
       <div class="navbar-end">
-        <p class = "control" v-if="isLoggedIn">
-          <a class="button is-white myButton" @click="goToPort()">Portfolio</a>
-        </p>
-        <p class = "control" v-if="isLoggedIn">
-          <a class="button is-white myButton" @click="goToDash()">Dashboard</a>
-        </p>
-        <p class = "control" v-if="isLoggedIn">
-          <a class="button is-white myButton" @click="goToAnalysis()">Analysis</a>
-        </p>
-        <p class = "control" v-if="isLoggedIn">
-          <a class="button namelabel myButton" @click="goToAcc()">{{ user.name }}</a>
-          <figure class="image is-32x32 myButton">
-            <img :src="user.image">
-          </figure>
-        <p class="control" v-if="!isLoggedIn">
-          <a class="button is-white myButton" @click="login()">Login with Google</a>
-        </p>
-        <p class = "control" v-if="isLoggedIn">
-          <a class="button is-danger myButton" @click="logout(); leave();">Logout</a>
-        </p>
+        <a class = "navbar-item isohel" v-if="isLoggedIn" @click="goToAcc()">
+              {{ user.name  }}
+        </a>
+        <a class = "navbar-item is-danger isohel" v-if="isLoggedIn" @click="logout();leave()">
+            Logout
+        </a>
       </div>
     </nav>
     <router-view class="main container"/>
@@ -42,7 +47,7 @@ export default {
   methods: {
     ...mapActions('auth', ['login', 'logout', 'leave']),
 
-    ...mapActions('navigation', ['goToPort', 'goToAnalysis', 'goToDash', 'goToAcc']),
+    ...mapActions('navigation', ['goToPort', 'goToAnalysis', 'goToDash', 'goToAcc', 'goToWatch', 'goToNews']),
   },
 };
 </script>
@@ -86,21 +91,30 @@ export default {
 }
 
 .navigationbar{
-  background: rgb(221,170,231);
-  background:
-   linear-gradient(90deg, rgba(221,170,231,1) 0%, rgba(170,196,233,1) 31%, rgba(56,255,236,1) 100%);
+  background: #363636;
+  color: whitesmoke;
 }
 
 .portfolio{
-  background: #cbfffa;
+  background: #e8175d;
+  color: whitesmoke;
 }
 
 .watchlist{
-  background: #fae1ff;
+  background: #cc527a;
+  color: whitesmoke;
 }
 .loggedIn{
   display: grid;
 
+}
+.isohel{
+  color:whitesmoke;
+}
+
+.ding{
+  background: #a8a7a8;
+  color: #363636;
 }
 
 </style>

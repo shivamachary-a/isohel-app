@@ -18,6 +18,7 @@ app = Flask(__name__) #initiates flask app
 stocks = {}
 options = []
 volol = []
+emaSignal = []
 
 CORS(app, resources={r'/*': {'origins': '*'}})
 
@@ -42,6 +43,43 @@ def getAdjClose(ticker):
       i = i + 1
       
   return values
+
+def getEMA(ticker):
+  today = date.today()
+  yesterday = date.today() - timedelta(days=1)
+  ti = ticker
+  end = "&apikey=A1VFP8M71VTXQIVO"
+  url = 'https://www.alphavantage.co/query?function=EMA&symbol=' + ti + '&interval=daily&time_period=2&series_type=open' + end
+  response = requests.get(url)
+  parsed = json.loads(response.text)
+  i = 0
+  todaysEMA = parsed["Technical Analysis: EMA"][str(today)]['EMA']
+  return todaysEMA
+
+def currentPrice(ticker):
+  today = date.today()
+  base = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol="
+  ti = ticker
+  end = "&apikey=A1VFP8M71VTXQIVO"
+  url = base + ti + end
+  response = requests.get(url)
+  parsed = json.loads(response.text)
+
+  todaysPrice = parsed['Time Series (Daily)'][str(today)]['4. close']
+  return todaysPrice
+
+def emaIndication(ticker):
+  ema = getEMA(ticker)
+  price = currentPrice(ticker)
+  buy = False
+  
+  if price > ema:
+    buy = True
+    print('Buy signal')
+    return buy
+  else:
+    print('Dont buy')
+    return buy
 
 def stockVolatility (values):
   return np.std(values) * np.sqrt(len(values))
@@ -127,6 +165,22 @@ def volatility():
   else:
     response_object['yonk'] = volol
   return jsonify(response_object)
+
+  @app.route('/analysis', methods=['GET','POST'])
+  def analysis():
+    response_object = {'status': 'success'}
+    if request.method == 'POST':
+      post_data = request.get_json()
+      print(post_data)
+      stock = post_data.get('ticker')
+      result = emaIndication(stock)
+      emaSignal.insert(0, {
+        'Result': result
+        'Price': currentPrice(stock)
+      })
+    else:
+      response_object['yonk'] = emaSignal
+  })
   
 
 

@@ -6,34 +6,25 @@
         <div class="tile is-vertical ">
           <div class="tile" >
             <div class="tile is-parent is-vertical">
-              <article class="tile is-child notification is-grey">
-                <p class="title is-1">Hi,</p>
-                <p class="subtitle is-4">{{user.name}}</p>
-                <p class="subtitle is-6">Welcome to isohel.</p>
-                <p class="subtitle is-6">Check out the latest guides and tools added!</p>
+              <article class="tile is-child notification ding">
+                <p class="title is-1 has-text-weight-light">
+                    WELCOME
+                </p>
               </article>
-              <article class="tile is-child notification is-light">
-                <p class="title"> Charts </p>
-                <p class="subtitle"> Powered by TradingView </p>
+              <article class="tile is-child notification is-black">
                 <Charts></Charts>
               </article>
             </div>
-            <div class="tile is-parent ">
+            <div class="tile is-parent">
               <article class="tile is-child notification watchlist">
-                <div class="content">
-                  <p class="title">Your watchlist</p>
-                  <p class="subtitle">You've got your eye on these:</p>
-                  <div class="content">
-                    <!-- Content -->
-                  </div>
-                </div>
+                  <p class="title has-text-weight-light">WATCHLIST</p>
+                    <Watch></Watch>
               </article>
             </div>
-            <div class="tile is-parent is-vertical ">
+            <div class="tile is-parent is-vertical">
               <article class="tile is-child notification portfolio">
-                <p class="title">Portfolio</p>
-                <p class="subtitle">Your stocks:</p>
-                <div class="table=container">
+                <p class="title has-text-weight-light">PORTFOLIO</p>
+                <div>
                   <Port></Port>
                 </div>
               </article>
@@ -55,6 +46,7 @@ import router from '@/router';
 import StockRow from '../components/StockRow.vue';
 import Charts from '../components/Charts.vue';
 import Port from '../components/PortC.vue';
+import Watch from '../components/WatchC.vue';
 
 export default {
   computed: mapState('auth', ['user', 'isLoggedIn']),
@@ -67,6 +59,7 @@ export default {
   components: {
     Charts,
     Port,
+    Watch,
   },
 };
 </script>
