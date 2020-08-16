@@ -26,7 +26,6 @@ export default {
   computed: mapState('port', ['portfolio']),
   methods: {
     ...mapActions('port', ['bindPortfolios', 'addToPortfolio'], ['deleteFromPortfolio']),
-    ...mapActions('StockRow', ['deleteC']),
     add: function () {
       this.message = '';
       if (this.stock.length <= 4 && (typeof this.stock === 'string' || this.stock instanceof String)) {
@@ -44,6 +43,9 @@ export default {
     },
     hideNotif: function () {
       this.error = false;
+    },
+    refresh: function () {
+      StockRow.methods.refresh();
     },
   },
   components: {

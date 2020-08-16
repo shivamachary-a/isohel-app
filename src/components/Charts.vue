@@ -1,9 +1,7 @@
 <template>
-  <div class="hello">
+  <div class="hello hi is-flex">
     <VueTradingView :options="{
       theme: 'dark',
-      width: '600',
-      height: '400',
     }" />
   </div>
 </template>
@@ -22,3 +20,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+  .hi{
+    display: flexbox;
+  }
+</style>

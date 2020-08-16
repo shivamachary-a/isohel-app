@@ -1,40 +1,36 @@
 <template>
-<div>
-  <div class="container cont is-fluid">
-    <div class="">
-        <div class="tile is-ancestor ">
-        <div class="tile is-vertical ">
-          <div class="tile" >
-            <div class="tile is-parent is-vertical">
-              <article class="tile is-child notification ding">
-                <p class="title is-1 has-text-weight-light">
-                    WELCOME
-                </p>
-              </article>
-              <article class="tile is-child notification is-black">
-                <Charts></Charts>
-              </article>
-            </div>
-            <div class="tile is-parent">
-              <article class="tile is-child notification watchlist">
-                  <p class="title has-text-weight-light">WATCHLIST</p>
-                    <Watch></Watch>
-              </article>
-            </div>
-            <div class="tile is-parent is-vertical">
-              <article class="tile is-child notification portfolio">
-                <p class="title has-text-weight-light">PORTFOLIO</p>
-                <div>
-                  <Port></Port>
-                </div>
-              </article>
-            </div>
+  <div class="container is-fluid">
+    <div class="tile is-ancestor ">
+      <div class="tile is-vertical ">
+        <div class="tile" >
+          <div class="tile is-parent is-vertical">
+            <article class="tile is-child notification ding">
+              <p class="title is-1 has-text-weight-light">
+                  WELCOME
+              </p>
+            </article>
+            <article class="tile is-child notification is-black">
+              <Charts></Charts>
+            </article>
+          </div>
+          <div class="tile is-parent">
+            <article class="tile is-child notification watchlist">
+                <p class="title has-text-weight-light">WATCHLIST</p>
+                  <Watch></Watch>
+            </article>
+          </div>
+          <div class="tile is-parent is-vertical">
+            <article class="tile is-child notification portfolio">
+              <p class="title has-text-weight-light">PORTFOLIO</p>
+              <div>
+                <Port></Port>
+              </div>
+            </article>
           </div>
         </div>
       </div>
-    </div>
-    </div>
-</div>
+  </div>
+  </div>
 </template>
 
 <script>
@@ -63,12 +59,3 @@ export default {
   },
 };
 </script>
-<style scoped>
-  .tilestruct {
-    display: grid;
-    align-self: center;
-  }
-  .cont{
-    margin-bottom: 1em;
-  }
-</style>

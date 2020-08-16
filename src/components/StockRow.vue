@@ -1,8 +1,8 @@
 <template>
   <div>
-      <tr v-if="componentKey">
-        <td class="pricebox">{{ getPrice() }}</td>
-        <a class ="button is-small yeet" @click="refresh()">Refresh</a>
+      <tr class="columns" v-if="componentKey">
+        <td class="pricebox column">{{ getPrice() }}</td>
+        <a class ="yeet column" @click="refresh()">Refresh</a>
       </tr>
   </div>
 </template>
@@ -71,8 +71,8 @@ export default {
 </script>
 <style scoped>
 .yeet {
-  display: grid;
-  margin-left: 1em;
+  display: inline-flex;
+  vertical-align: middle;
 }
 
 .pricebox {

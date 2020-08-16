@@ -3046,7 +3046,6 @@ Total : 3061 files,  849698 codes, 453813 comments, 205828 blanks, all 1509339 l
 | [backend/euro.py](/backend/euro.py) | Python | 16 | 10 | 10 | 36 |
 | [firebase.json](/firebase.json) | JSON | 16 | 7 | 0 | 23 |
 | [firestore.indexes.json](/firestore.indexes.json) | JSON | 4 | 0 | 1 | 5 |
-| [functions/.eslintrc.json](/functions/.eslintrc.json) | JSON | 48 | 39 | 37 | 124 |
 | [functions/index.js](/functions/index.js) | JavaScript | 1 | 6 | 2 | 9 |
 | [functions/package-lock.json](/functions/package-lock.json) | JSON | 2,943 | 0 | 1 | 2,944 |
 | [functions/package.json](/functions/package.json) | JSON | 25 | 0 | 1 | 26 |
