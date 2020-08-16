@@ -10,6 +10,10 @@
     "postinstall": "electron-builder install-app-deps",
     "postuninstall": "electron-builder install-app-deps"
   },
+  "engines": {
+    "node": ">=10.0.0",
+    "npm": ">=6.0.0"
+  },
   "main": "background.js",
   "dependencies": {
     "axios": "^0.18.0",
