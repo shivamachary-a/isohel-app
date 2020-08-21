@@ -1,4 +1,5 @@
 import numpy as np
+import scipy
 import scipy.stats as si
 import sympy as sy
 from sympy.stats import Normal, cdf
@@ -17,7 +18,7 @@ app = Flask(__name__) #initiates flask app
 
 stocks = {}
 options = []
-volol = []
+vol = []
 emaSignal = []
 
 CORS(app, resources={r'/*': {'origins': '*'}})
@@ -46,26 +47,40 @@ def getAdjClose(ticker):
 
 def getEMA(ticker):
   today = date.today()
-  yesterday = date.today() - timedelta(days=1)
+  prior = date.today() - timedelta(days=2)
   ti = ticker
   end = "&apikey=A1VFP8M71VTXQIVO"
   url = 'https://www.alphavantage.co/query?function=EMA&symbol=' + ti + '&interval=daily&time_period=2&series_type=open' + end
   response = requests.get(url)
   parsed = json.loads(response.text)
-  i = 0
-  todaysEMA = parsed["Technical Analysis: EMA"][str(today)]['EMA']
+  success = False
+  print(url)
+  while success == False:
+    try:
+      todaysEMA = parsed["Technical Analysis: EMA"][str(today)]['EMA']
+      success = True
+    except KeyError:
+      todaysEMA = parsed["Technical Analysis: EMA"][str(prior)]['EMA']
+      success = True
   return todaysEMA
 
 def currentPrice(ticker):
   today = date.today()
+  prior = date.today() - timedelta(days=3)
   base = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol="
   ti = ticker
   end = "&apikey=A1VFP8M71VTXQIVO"
   url = base + ti + end
   response = requests.get(url)
   parsed = json.loads(response.text)
-
-  todaysPrice = parsed['Time Series (Daily)'][str(today)]['4. close']
+  print(url)
+  try:
+    todaysPrice = parsed['Time Series (Daily)'][str(today)]['4. close']
+  except KeyError:
+    try:
+      todaysPrice = parsed['Time Series (Daily)'][str(prior)]['4. close']
+    except KeyError:
+      return 0
   return todaysPrice
 
 def emaIndication(ticker):
@@ -119,9 +134,9 @@ def euro_vanilla_put(S, K, T, r, sigma):
 
 
 @app.route('/', methods=['GET', 'POST']) #creating the base route for the application
-def yeet():
+def bAndS():
   response_object = {'status': 'success'} #creating the object to send back to the frontend
-  if request.method == 'POST':
+  if request.method == 'POST': #determining its a POST request, so we are receiving data
     post_data = request.get_json() #getting the data sent from the frontend
     #creating object holding data from post request
     stocks = {
@@ -132,6 +147,7 @@ def yeet():
       'Interest': float(post_data.get('Interest')),
       'Volatility': float(post_data.get('Volatility')),
     }
+    #assigning returns of the functions to variables
     call = float(euro_vanilla_call(stocks['Price'], stocks['Strike'], stocks['Time'], stocks['Interest'], stocks['Volatility']))
     put = float(euro_vanilla_put(stocks['Price'], stocks['Strike'], stocks['Time'], stocks['Interest'], stocks['Volatility']))
     
@@ -140,9 +156,10 @@ def yeet():
       'Call': call,
       'Put' : put,
     })
+    #creating a response object holding the function return
     response_object['options'] = options
     print(options)
-  else:
+  else: #the only request types are POST and GET, hence if its not a POST, its get and we just have to return the response object.
     response_object['stocks'] = options
   return jsonify(response_object)
 
@@ -158,31 +175,36 @@ def volatility():
     close =  getAdjClose(stock)
     result = stockVolatility(close)
     print(result)
-    volol.insert(0, {
+    vol.insert(0, {
       'Result': result
     })
-    print(volol)
+    print(vol)
   else:
-    response_object['yonk'] = volol
+    response_object['yonk'] = vol
   return jsonify(response_object)
 
-  @app.route('/analysis', methods=['GET','POST'])
-  def analysis():
-    response_object = {'status': 'success'}
-    if request.method == 'POST':
-      post_data = request.get_json()
-      print(post_data)
-      stock = post_data.get('ticker')
-      result = emaIndication(stock)
-      emaSignal.insert(0, {
-        'Result': result
-        'Price': currentPrice(stock)
-      })
-    else:
-      response_object['yonk'] = emaSignal
-  })
+@app.route('/analysis', methods=['GET','POST'])
+def analysis():
+  response_object = {'status': 'success'}
+  if request.method == 'POST':
+    post_data = request.get_json()
+    print(post_data)
+    stock = post_data.get('ticker')
+    print(stock)
+    result = emaIndication(stock)
+    print(result)
+    emaSignal.insert(0,{
+      'Result': result,
+      'Price': currentPrice(stock)
+    })
+    print(emaSignal)
+  else:
+    response_object['yonk'] = emaSignal
+    print(response_object)
+  return jsonify(response_object)
   
-
+euro_vanilla_call(100,50,1,0.05,0.25)
+euro_vanilla_put(100,50,1,0.05,0.25)
 
 
     

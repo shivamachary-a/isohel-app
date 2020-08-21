@@ -28,7 +28,10 @@ const actions = {
     router.push('/watchlist');
   },
   goToNews() {
-    router.push('news');
+    router.push('/news');
+  },
+  goToPred() {
+    router.push('/pred');
   },
 };
 

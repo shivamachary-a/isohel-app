@@ -1,5 +1,8 @@
 <template>
     <div>
+        <a class="button back" @click="$router.go(-1)">
+            Back
+        </a>
         <div class="box">
             <h1 class="title">Volatility</h1>
             <h1 class="subtitle">Enter the stock ticker:</h1>

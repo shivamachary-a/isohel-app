@@ -9,7 +9,7 @@
                   WELCOME
               </p>
             </article>
-            <article class="tile is-child notification is-black">
+            <article class="tile is-child notification chartstuff">
               <Charts></Charts>
             </article>
           </div>

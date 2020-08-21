@@ -1,5 +1,10 @@
 <template>
+<div>
+  <a class="button back" @click="$router.go(-1)">
+    Back
+  </a>
  <VueRssFeed :feedUrl='feedUrl' :name='name' :limit='limit'/>
+</div>
 </template>
 
 <script>

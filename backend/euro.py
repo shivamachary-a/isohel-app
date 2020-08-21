@@ -34,3 +34,7 @@ def euro_vanilla_put(S, K, T, r, sigma):
   put = (K * np.exp(-r * T) * si.norm.cdf(-d2, 0.0, 1.0) - S * si.norm.cdf(-d1, 0.0, 1.0))
   
   return put
+
+
+print("Call Value: " + str(euro_vanilla_call(100,50,1,0.05,0.25)))
+print("Put Value: " + str(euro_vanilla_put(100,50,1,0.05,0.25)))

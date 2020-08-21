@@ -7,7 +7,7 @@
       </a>
       </div>
         <div class="navbar-item has-dropdown is-hoverable" v-if="isLoggedIn">
-          <a class="navbar-link isohel is-arrowless">
+          <a class="navbar-item isohel is-arrowless">
             MENU
           </a>
           <div class="navbar-dropdown">
@@ -26,9 +26,9 @@
           </div>
         </div>
       <div class="navbar-end">
-        <a class = "navbar-item isohel" v-if="isLoggedIn" @click="goToAcc()">
+        <p class = "navbar-item isohel" v-if="isLoggedIn">
               {{ user.name  }}
-        </a>
+        </p>
         <a class = "navbar-item is-danger isohel" v-if="isLoggedIn" @click="logout();leave()">
             Logout
         </a>
@@ -115,6 +115,9 @@ export default {
 .ding{
   background: #a8a7a8;
   color: #363636;
+}
+.chartstuff {
+  background: #141722;
 }
 
 </style>

@@ -1,5 +1,8 @@
 <template>
   <div>
+    <a class="button back" @click="$router.go(-1)">
+            Back
+    </a>
     <h1 class="title">YOUR PORTFOLIO</h1>
     <div class="field">
       <div class="control">
