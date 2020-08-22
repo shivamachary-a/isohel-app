@@ -97,7 +97,11 @@ def emaIndication(ticker):
     return buy
 
 def stockVolatility (values):
-  return np.std(values) * np.sqrt(len(values))
+  returns = []
+  for i in range (1, len(values)-1):
+    returns.append(np.log(values[i]/values[i-1]))
+  deviation = np.std(returns)
+  return (deviation * np.sqrt(252))*100
 
 def euro_vanilla_call(S, K, T, r, sigma):
     
@@ -202,9 +206,7 @@ def analysis():
     response_object['yonk'] = emaSignal
     print(response_object)
   return jsonify(response_object)
-  
-euro_vanilla_call(100,50,1,0.05,0.25)
-euro_vanilla_put(100,50,1,0.05,0.25)
+
 
 
     

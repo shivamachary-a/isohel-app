@@ -2,6 +2,7 @@ import requests
 import json
 from datetime import date, timedelta
 import numpy as np
+from pandas_datareader import DataReader
 
 
 
@@ -28,7 +29,12 @@ def getAdjClose(ticker):
   return values
 
 def stockVolatility (values):
-  return np.std(values) * np.sqrt(len(values))
+  returns = []
+  for i in range (1, len(values)-1):
+    returns.append(np.log(values[i]/values[i-1]))
+  deviation = np.std(returns)
+  return (deviation * np.sqrt(252))*100
+
 
 
 def getEMA(ticker):
@@ -68,6 +74,5 @@ def emaIndication(ticker):
     print('Dont buy')
     return buy
 
-emaIndication('MSFT')
-
+print(stockVolatility(getAdjClose('TSLA')))
 

@@ -90,7 +90,6 @@
               Your call option is priced at:
               ${{ (Math.round(stocks[0].Call * 1000)/1000) }}
             </p>
-            <p>{{ stocks }}</p>
             <p class = "is-large slant" v-if="success">
               Your put option is priced at: ${{ (Math.round(stocks[0].Put * 1000))/1000 }}
             </p>
