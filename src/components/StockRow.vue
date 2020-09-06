@@ -1,7 +1,7 @@
 <template>
   <div>
       <tr class="columns" v-if="componentKey">
-        <td class="pricebox column">{{ getPrice() }}</td>
+        <td class="pricebox column">{{ display() }}</td>
         <a class ="yeet column" @click="refresh()">Refresh</a>
       </tr>
   </div>
@@ -57,6 +57,14 @@ export default {
       this.calliex();
       this.getPrice();
     },
+    display() {
+      if (this.getPrice() == 'error') {
+        const val = this.getPrice();
+        return val;
+      } else {
+        return this.getPrice();
+      }
+    }
   },
   created: function () {
     this.refresh();
@@ -67,12 +75,14 @@ export default {
       this.refresh();
       }, 5000);
   },
+
 };
 </script>
 <style scoped>
 .yeet {
   display: inline-flex;
   vertical-align: middle;
+  color:white;
 }
 
 .pricebox {

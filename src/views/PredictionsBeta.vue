@@ -11,7 +11,7 @@
         <h3 class="title margins is-3 has-text-weight-light"> OR CHOOSE FROM YOUR PORTFOLIO: </h3>
         <div class="margins">
             <p v-for="stock in portfolio" :key="stock['Ticker']" :value="stock['Ticker']">
-                <button class="button buttons is-rounded is-outlined" @click="map(stock['Ticker'])">{{ stock['Ticker'] }}</button>
+                <button class="button buttons is-outlined" @click="map(stock['Ticker'])">{{ stock['Ticker'] }}</button>
             </p>
         </div>
         <button class="button buttons is-rounded is-outlined" @click="submit()">Submit</button>

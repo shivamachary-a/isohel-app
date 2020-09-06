@@ -47,7 +47,9 @@ def getAdjClose(ticker):
 
 def getEMA(ticker):
   today = date.today()
-  prior = date.today() - timedelta(days=2)
+  prior = date.today() - timedelta(days=1)
+  prior2 = date.today() - timedelta(days=2)
+  prior3 = date.today() - timedelta(days=3)
   ti = ticker
   end = "&apikey=A1VFP8M71VTXQIVO"
   url = 'https://www.alphavantage.co/query?function=EMA&symbol=' + ti + '&interval=daily&time_period=2&series_type=open' + end
@@ -55,18 +57,24 @@ def getEMA(ticker):
   parsed = json.loads(response.text)
   success = False
   print(url)
-  while success == False:
+  
+  try:
+    todaysEMA = parsed["Technical Analysis: EMA"][str(today)]['EMA']
+  except KeyError:
     try:
-      todaysEMA = parsed["Technical Analysis: EMA"][str(today)]['EMA']
-      success = True
-    except KeyError:
       todaysEMA = parsed["Technical Analysis: EMA"][str(prior)]['EMA']
-      success = True
+    except KeyError:
+      try:
+        todaysEMA = parsed["Technical Analysis: EMA"][str(prior2)]['EMA']
+      except KeyError:
+          todaysEMA = parsed["Technical Analysis: EMA"][str(prior3)]['EMA']      
   return todaysEMA
 
 def currentPrice(ticker):
   today = date.today()
-  prior = date.today() - timedelta(days=3)
+  prior = date.today() - timedelta(days=1)
+  prior2 = date.today() - timedelta(days=2)
+  prior3 = date.today() - timedelta(days=3)
   base = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol="
   ti = ticker
   end = "&apikey=A1VFP8M71VTXQIVO"
@@ -80,15 +88,18 @@ def currentPrice(ticker):
     try:
       todaysPrice = parsed['Time Series (Daily)'][str(prior)]['4. close']
     except KeyError:
-      return 0
+      try:
+        todaysPrice = parsed['Time Series (Daily)'][str(prior2)]['4. close'] 
+      except KeyError:
+        todaysPrice = parsed['Time Series (Daily)'][str(prior3)]['4. close']
   return todaysPrice
 
 def emaIndication(ticker):
   ema = getEMA(ticker)
-  price = currentPrice(ticker)
+  price = float(currentPrice(ticker))
   buy = False
   
-  if price > ema:
+  if price > float(ema):
     buy = True
     print('Buy signal')
     return buy

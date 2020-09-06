@@ -98,11 +98,15 @@ export default {
 .portfolio{
   background: #e8175d;
   color: whitesmoke;
+  margin-left: 0.5em;
+  margin-right: 0.5em;
 }
 
 .watchlist{
   background: #cc527a;
   color: whitesmoke;
+  margin-left: 0.5em;
+  margin-right: 0.5em;
 }
 .loggedIn{
   display: grid;
@@ -113,7 +117,7 @@ export default {
 }
 
 .ding{
-  background: #a8a7a8;
+  background: white;
   color: #363636;
 }
 .chartstuff {

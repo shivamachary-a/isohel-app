@@ -1,36 +1,31 @@
 <template>
-  <div class="container is-fluid">
-    <div class="tile is-ancestor ">
-      <div class="tile is-vertical ">
-        <div class="tile" >
-          <div class="tile is-parent is-vertical">
-            <article class="tile is-child notification ding">
-              <p class="title is-1 has-text-weight-light">
-                  WELCOME
-              </p>
-            </article>
-            <article class="tile is-child notification chartstuff">
-              <Charts></Charts>
-            </article>
-          </div>
-          <div class="tile is-parent">
-            <article class="tile is-child notification watchlist">
-                <p class="title has-text-weight-light">WATCHLIST</p>
-                  <Watch></Watch>
-            </article>
-          </div>
-          <div class="tile is-parent is-vertical">
-            <article class="tile is-child notification portfolio">
-              <p class="title has-text-weight-light">PORTFOLIO</p>
-              <div>
-                <Port></Port>
-              </div>
-            </article>
-          </div>
-        </div>
+<div class="container is-fluid">
+  <div class="level tile is-ancestor">
+    <div class ="level-item tile is-vertical is-parent">
+      <article class ="tile is-child box">
+        WELCOME
+      </article>
+      <article class ="tile is-child">
+        <Charts></Charts>
+      </article>
+    </div>
+      <div class="level-item tile is-parent is-vertical">
+        <article class="tile is-child box portfolio mx-4">
+          <h1 class="title has-text-weight-light has-text-white header">PORTFOLIO</h1>
+          <Port></Port>
+        </article>
+        <article class="tile is-child box">
+          <p class="is-family-code mt-6 is-size-7">note: sometimes you might have to press refresh if theres an error.</p> 
+        </article>
+      </div>
+      <div class="level-item tile is-parent -is-vertical">
+        <article class="tile is-child box watchlist mx-4">
+            <h1 class="title has-text-weight-light has-text-white header">WATCHLIST</h1>
+            <Watch></Watch>
+        </article>
       </div>
   </div>
-  </div>
+</div>
 </template>
 
 <script>
@@ -59,3 +54,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+  .header {
+    margin-bottom:1em;
+  }
+</style>
